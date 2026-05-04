@@ -1,11 +1,11 @@
-import UserInfo from "../components/UserInfo.jsx";
-import Wrapper from "../components/Wrapper.jsx";
+import {City, Contacts, Email, Name} from "../components/Name_City_Email.jsx";
 
 function Home() {
     return (
-        <Wrapper>
-            <UserInfo name={'Олег'} city={'Нижневартовск'} />
-        </Wrapper>
+        <Name />,
+        <City />,
+        <Email />,
+        <Contacts />
     )
 }
 
