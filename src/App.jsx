@@ -1,8 +1,7 @@
-function App() {
+import Home from "./pages/Home.jsx";
 
-  return (
-    <h1>Hello, React!</h1>
-  )
+function App() {
+    return <Home />
 }
 
 export default App
