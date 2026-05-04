@@ -1,7 +1,7 @@
+import Header from "../components/Header.jsx";
+
 function Home() {
-    return (
-        <h1>Hello, React!</h1>
-    )
+    return <Header />
 }
 
 export default Home
