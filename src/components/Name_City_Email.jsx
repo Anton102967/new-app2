@@ -12,7 +12,10 @@ export function Email() {
 
 export function Contacts() {
     return(
-        <Email />,
-        <h1>My phone, Samsung</h1>
+        <>
+            <Email />
+            <h1>My phone, Samsung</h1>
+        </>
+
     )
 }
