@@ -1,10 +1,11 @@
-import Header from "../components/Header.jsx";
-import fetchData from "../api/fetchData.js";
+import UserInfo from "../components/UserInfo.jsx";
+import Wrapper from "../components/Wrapper.jsx";
 
 function Home() {
-    fetchData();
     return (
-        <Header title="Home" />
+        <Wrapper>
+            <UserInfo name={'Олег'} city={'Нижневартовск'} />
+        </Wrapper>
     )
 }
 
