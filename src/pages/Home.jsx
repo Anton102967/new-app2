@@ -1,8 +1,7 @@
 import Header from "../components/Header.jsx";
-import formatText from "../helpers/formatText.js";
 
 function Home() {
-    return formatText(<Header />);
+    return <Header title="Home" />
 }
 
 export default Home

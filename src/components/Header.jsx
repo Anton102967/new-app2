@@ -1,6 +1,7 @@
+import formatText from "../helpers/formatText.js";
 
-function Header()  {
-    return <h1>Hello, React!</h1>
+function Header({title})  {
+    return <h1>{formatText(title)}</h1>
 }
 
 export default Header;
