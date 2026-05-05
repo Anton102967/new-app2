@@ -22,3 +22,12 @@ export function Contacts() {
         </>
     )
 }
+
+export function Profile() {
+    return (
+        <>
+            <h1>Имя пользователя</h1>
+            <p>Описание пользователя</p>
+        </>
+    )
+}

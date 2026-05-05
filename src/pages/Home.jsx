@@ -1,14 +1,7 @@
-import {City, Contacts, Name} from "../components/Name_City_Email.jsx";
+import {Profile} from "../components/Test.jsx";
 
 function Home() {
-    return (
-        <>
-            <Name />
-            <City />
-            <Contacts />
-        </>
-
-    )
+    return <Profile />
 }
 
 export default Home
