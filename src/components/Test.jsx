@@ -53,3 +53,19 @@ export function HobbiesList() {
          </ul>
      )
 }
+
+export function TaskList() {
+     const tasks = [
+      { id: 1, description: 'Learn React' },
+      { id: 2, description: 'Practice keys' },
+      { id: 3, description: 'Build task list' }
+    ];
+
+     return(
+         <ul>
+             {tasks.map(task => (
+                 <li key={task.id}>{task.description}</li>
+             ))}
+         </ul>
+     )
+}

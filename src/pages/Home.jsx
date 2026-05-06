@@ -1,11 +1,10 @@
-import {HobbiesList, UserStatus} from "../components/Test.jsx";
+import { TaskList } from "../components/Test.jsx";
 
 function Home() {
     return(
-        <div>
-            <UserStatus />
-            <HobbiesList />
-        </div>
+        <>
+            <TaskList />
+        </>
     )
 }
 
