@@ -31,3 +31,25 @@ export function Profile() {
         </>
     )
 }
+
+export function UserStatus() {
+    const isLoggedIn = true;
+
+    if (isLoggedIn) {
+        return "Пользователь онлайн";
+    } else {
+        return "Пользователь офлайн";
+    }
+}
+
+export function HobbiesList() {
+     const hobbies = ['Спорт', 'Музыка', 'Чтение', 'Игры'];
+
+     return(
+         <ul>
+             {hobbies.map((nobb) => (
+                <li key={nobb}>{nobb}</li>
+             ))}
+         </ul>
+     )
+}

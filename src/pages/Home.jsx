@@ -1,7 +1,12 @@
-import {Profile} from "../components/Test.jsx";
+import {HobbiesList, UserStatus} from "../components/Test.jsx";
 
 function Home() {
-    return <Profile />
+    return(
+        <div>
+            <UserStatus />
+            <HobbiesList />
+        </div>
+    )
 }
 
 export default Home
