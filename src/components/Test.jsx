@@ -121,16 +121,16 @@ export function InteractiveDiv() {
 }
 
 export function EventWithParams() {
-    const EventWitOnClick  = () => {
-        console.log("Привет, React!");
+    const EventWitOnClick  = ({message}) => {
+        console.log({message});
     };
 
      return(
         <div
-            onClick={EventWitOnClick}
+            onClick={() => EventWitOnClick('Привет, React!')}
             style={{padding: '20px', margin: '30px'}}
         >
-            Интерактивный элемент
+            Передать параметр
         </div>
      )
 }
