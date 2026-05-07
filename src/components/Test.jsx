@@ -83,7 +83,7 @@ export function ProductCard({name, price}) {
 export function DynamicButton({text}) {
      return(
          <button
-             onClick={() => console.log(`Вы нажали на кнопку ${text}`)}
+             onClick={() => alert(`Вы нажали на кнопку ${text}`)}
          >
              {text}
          </button>
