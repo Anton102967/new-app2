@@ -68,6 +68,8 @@ export function TaskList() {
              ))}
          </ul>
      )
+
+
 }
 
 export function ProductCard({name, price}) {
@@ -75,5 +77,15 @@ export function ProductCard({name, price}) {
          <div>
              <span>Товар с названием {name} по цене {price}р</span>
          </div>
+     )
+}
+
+export function DynamicButton({text}) {
+     return(
+         <button
+             onClick={() => console.log(`Вы нажали на кнопку ${text}`)}
+         >
+             {text}
+         </button>
      )
 }

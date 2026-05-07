@@ -1,7 +1,7 @@
-import Home from "./pages/Home.jsx";
+import {DynamicButton} from "./components/Test.jsx";
 
 function App() {
-    return <Home />
+    return <DynamicButton text={'Кнопка'}/>
 }
 
 export default App
