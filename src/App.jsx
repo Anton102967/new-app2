@@ -1,9 +1,9 @@
-import {HoverMessage} from "./components/Test.jsx";
+import {InteractiveDiv} from "./components/Test.jsx";
 
 function App() {
     return (
         <>
-            <HoverMessage />
+            <InteractiveDiv />
         </>
     )
 }

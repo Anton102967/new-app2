@@ -99,3 +99,23 @@ export function HoverMessage() {
         </div>
      )
 }
+
+export function InteractiveDiv() {
+    const handleMouseLeave = () => {
+        console.log("Мышь покинула элемент");
+    };
+
+    const handleOnClick  = () => {
+        console.log("Вы нажали на элемент");
+    };
+
+     return(
+        <div
+            onClick={handleOnClick}
+            onMouseLeave ={handleMouseLeave}
+            style={{padding: '20px', margin: '30px'}}
+        >
+            Интерактивный элемент
+        </div>
+     )
+}
