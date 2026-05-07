@@ -82,10 +82,20 @@ export function ProductCard({name, price}) {
 
 export function DynamicButton({text}) {
      return(
-         <button
-             onClick={() => alert(`Вы нажали на кнопку ${text}`)}
-         >
+        <button onClick={() => alert(`Вы нажали на кнопку: ${text}`)}>
              {text}
          </button>
+     )
+}
+
+export function HoverMessage() {
+    const handleMouseEnter = () => {
+        console.log("Мышь наведена");
+    };
+
+     return(
+        <div onMouseEnter={handleMouseEnter}>
+            Наведи на меня
+        </div>
      )
 }
