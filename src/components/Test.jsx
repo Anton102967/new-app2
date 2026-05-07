@@ -69,3 +69,11 @@ export function TaskList() {
          </ul>
      )
 }
+
+export function ProductCard({name, price}) {
+     return(
+         <div>
+             <span>Товар с названием {name} по цене {price}р</span>
+         </div>
+     )
+}

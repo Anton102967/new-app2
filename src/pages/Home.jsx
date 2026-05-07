@@ -1,9 +1,9 @@
-import { TaskList } from "../components/Test.jsx";
+import {ProductCard} from "../components/Test.jsx";
 
 function Home() {
     return(
         <>
-            <TaskList />
+            <ProductCard name={'апельсины'} price={'45'}/>
         </>
     )
 }
