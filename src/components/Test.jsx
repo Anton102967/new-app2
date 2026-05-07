@@ -134,3 +134,24 @@ export function EventWithParams() {
         </button>
      )
 }
+
+export function FormEvents() {
+    const onSubmitHeandler = (event) => {
+        event.preventDefault();
+        const element = event.target.elements.text.value;
+        console.log(element);
+    }
+     return(
+         <form
+            onSubmit={onSubmitHeandler}
+         >
+             <input
+                 name="text" type="text"
+                 style={{padding: '20px', margin: '30px'}}
+             >
+             Передать параметр
+             </input>
+             <button type="submit">Отправить</button>
+        </form>
+    )
+}

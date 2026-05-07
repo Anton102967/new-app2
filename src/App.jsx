@@ -1,9 +1,9 @@
-import {EventWithParams, InteractiveDiv} from "./components/Test.jsx";
+import {FormEvents} from "./components/Test.jsx";
 
 function App() {
     return (
         <>
-            <EventWithParams />
+            <FormEvents />
         </>
     )
 }
