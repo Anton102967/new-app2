@@ -197,12 +197,12 @@ export function Modal({isOpen, onClose, children}) {
      return createPortal(
          <div className='modal'>
              <div className={'modal-content'}>
-                 <button onClick={onClose} className={'close-button'}>
+                 <button onClick={() => onClose(false)} className={'close-button'}>
                      Закрыть модальное окно
                  </button>
                  {children}
              </div>
-             <div onClick={onClose} className='modal-overlay'></div>
+             <div onClick={() => onClose(false)} className='modal-overlay'></div>
         </div>,
          document.body
     )

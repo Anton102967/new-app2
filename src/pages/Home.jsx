@@ -6,7 +6,6 @@ function Home() {
    return (
        <div>
            <button
-               type="checkbox"
                onClick={() => setIsModalOpen(true)}
            >
                Открыть модальное окно
