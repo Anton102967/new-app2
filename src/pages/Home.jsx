@@ -1,19 +1,21 @@
-import {ProductCard} from "../components/Test.jsx";
+import {Modal} from "../components/Test.jsx";
+import {useState} from "react";
 
 function Home() {
-    const products = [
-      { id: 1, name: 'Апельсины', price: 45 },
-      { id: 2, name: 'Яблоки', price: 60 },
-      { id: 3, name: 'Бананы', price: 80 },
-      { id: 4, name: 'Груши', price: 95 },
-    ];
-    return(
-        <>
-            {products.map(el => (
-                <ProductCard name={el.name} price={el.price} key={el.id} />
-            ))}
-        </>
-    )
+    const [isModalOpen, setIsModalOpen] = useState(false);
+   return (
+       <div>
+           <button
+               type="checkbox"
+               onClick={() => setIsModalOpen(true)}
+           >
+               Открыть модальное окно
+           </button>
+           <Modal isOpen={isModalOpen} onClose={setIsModalOpen}>
+               <p>Я пишу что то внутри</p>
+           </Modal>
+       </div>
+   )
 }
 
 export default Home

@@ -1,9 +1,9 @@
-import {Counter} from "./components/Test.jsx";
+import Home from "./pages/Home.jsx";
 
 function App() {
     return (
         <>
-            <Counter />
+            <Home />
         </>
     )
 }

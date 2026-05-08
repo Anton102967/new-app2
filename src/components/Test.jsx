@@ -1,4 +1,5 @@
 import {Component} from 'react';
+import {createPortal} from "react-dom";
 
 export function Name() {
     return <h1>My name Oleg</h1>
@@ -188,4 +189,21 @@ export class Counter extends Component {
             </div>
         )
     }
+}
+
+export function Modal({isOpen, onClose, children}) {
+    if(!isOpen) return null;
+
+     return createPortal(
+         <div className='modal'>
+             <div className={'modal-content'}>
+                 <button onClick={onClose} className={'close-button'}>
+                     Закрыть модальное окно
+                 </button>
+                 {children}
+             </div>
+             <div onClick={onClose} className='modal-overlay'></div>
+        </div>,
+         document.body
+    )
 }
