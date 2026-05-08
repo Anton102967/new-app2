@@ -168,6 +168,7 @@ export class Counter extends Component {
         this.decrementCount = this.decrementCount.bind(this);
 
 
+
     }
 
     incrementCount() {
@@ -182,8 +183,8 @@ export class Counter extends Component {
         return (
             <div>
                 <div>Счетчик с числом {this.state.count}</div>
-                <button onClick={incrementCount}>Увеличить число</button>
-                <button onClick={decrementCount}>Уменьшить число</button>
+                <button onClick={this.incrementCount}>Увеличить число</button>
+                <button onClick={this.decrementCount}>Уменьшить число</button>
             </div>
         )
     }
