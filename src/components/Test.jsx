@@ -1,3 +1,5 @@
+import {Component} from 'react';
+
 export function Name() {
     return <h1>My name Oleg</h1>
 }
@@ -146,12 +148,43 @@ export function FormEvents() {
             onSubmit={onSubmitHeandler}
          >
              <input
-                 name="text" type="text"
+                 name="text" type="text" 
                  style={{padding: '20px', margin: '30px'}}
-             >
-             Передать параметр
-             </input>
+             />
              <button type="submit">Отправить</button>
         </form>
     )
+}
+
+export class Counter extends Component {
+    constructor(props) {
+        super(props);
+
+        this.state = {
+            count: 0,
+        }
+
+        this.incrementCount = this.incrementCount.bind(this);
+        this.decrementCount = this.decrementCount.bind(this);
+
+
+    }
+
+    incrementCount() {
+        this.setState({count: this.state.count + 1});
+    }
+
+    decrementCount() {
+        this.setState({count: this.state.count - 1});
+    }
+
+    render() {
+        return (
+            <div>
+                <div>Счетчик с числом {this.state.count}</div>
+                <button onClick={incrementCount}>Увеличить число</button>
+                <button onClick={decrementCount}>Уменьшить число</button>
+            </div>
+        )
+    }
 }

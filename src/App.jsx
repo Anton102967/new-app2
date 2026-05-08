@@ -1,9 +1,9 @@
-import {FormEvents} from "./components/Test.jsx";
+import {Counter} from "./components/Test.jsx";
 
 function App() {
     return (
         <>
-            <FormEvents />
+            <Counter />
         </>
     )
 }
