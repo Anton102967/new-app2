@@ -1,9 +1,9 @@
-import {ThemeSwitcher, ToDoList} from "./components/Test.jsx";
+import {MultiCounter} from "./components/Test.jsx";
 
 function App() {
     return (
         <>
-            <ThemeSwitcher />
+            <MultiCounter />
         </>
     )
 }

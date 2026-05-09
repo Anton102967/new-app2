@@ -261,3 +261,17 @@ export function ThemeSwitcher() {
         </div>
     )
 }
+
+export function MultiCounter() {
+    const [count, setCount] = useState(0);
+     return (
+        <div>
+            {count}
+            <>
+                <button onClick={() => setCount(count => count + 1)}>Увеличить</button>
+                <button onClick={() => setCount(count => count -1)}>Уменьшить</button>
+                <button onClick={() => setCount(0)}>Сбросить</button>
+            </>
+        </div>
+    )
+}
