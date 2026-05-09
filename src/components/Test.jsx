@@ -1,4 +1,4 @@
-import {Component} from 'react';
+import {Component, useState} from 'react';
 import {createPortal} from "react-dom";
 
 export function Name() {
@@ -205,5 +205,40 @@ export function Modal({isOpen, onClose, children}) {
              <div onClick={() => onClose(false)} className='modal-overlay'></div>
         </div>,
          document.body
+
+
+    )
+}
+
+export function ToDoList() {
+    const [tasks, setTasks] = useState([{ id: 1, text: 'Купить молоко' }, { id: 2, text: 'Прочитать книгу' }]);
+
+    const deleteTasks = (id) => {
+        setTasks(tasks.filter(task => task.id !== id));
+    }
+
+    const onSubmitTasks = (e) => {
+        e.preventDefault();
+        setTasks([...tasks, {id: Date.now(), text: e.target.elements.text.value} ])
+    }
+
+     return (
+        <>
+            {tasks.map(task => (
+                <div key={task.id} style={{margin: '20px', paddingLeft: '20px'}}>
+                    <li >{task.text}</li>
+                    <button onClick={() => deleteTasks(task.id)}>Удалить текущий элемент</button>
+                </div>
+
+            ))}
+
+            <form
+                onSubmit={onSubmitTasks}
+                style={{margin: '20px', paddingLeft: '20px', display: 'flex', gap: '20px'}} action=""
+            >
+                <input name={'text'} type={"text"}/>
+                <button >Добавить элемент</button>
+            </form>
+        </>
     )
 }
