@@ -247,13 +247,17 @@ export function ThemeSwitcher() {
     const [isDarkMode, setIsDarkMode] = useState(false);
 
      return (
-        <>
-            {isDarkMode
-                ?
-                <button onClick={() => setIsDarkMode(prew => !prew)} style={{background: "black", color: "white"}}>Нажми на меня</button>
-                :
-                <button onClick={() => setIsDarkMode(prew => !prew)}>Нажми на меня</button>
-            }
-        </>
+        <div
+            style={{
+                background: isDarkMode ? 'black' : 'white',
+                color: isDarkMode ? 'white' : 'black',
+                padding: '20px'
+            }}
+        >
+            <button onClick={() => setIsDarkMode(prew => !prew)}
+            >
+                {isDarkMode ? 'Включить светлую тему' : 'Включить темную тему'}
+            </button>
+        </div>
     )
 }
