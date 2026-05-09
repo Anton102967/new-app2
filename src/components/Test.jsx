@@ -242,3 +242,18 @@ export function ToDoList() {
         </>
     )
 }
+
+export function ThemeSwitcher() {
+    const [isDarkMode, setIsDarkMode] = useState(false);
+
+     return (
+        <>
+            {isDarkMode
+                ?
+                <button onClick={() => setIsDarkMode(prew => !prew)} style={{background: "black", color: "white"}}>Нажми на меня</button>
+                :
+                <button onClick={() => setIsDarkMode(prew => !prew)}>Нажми на меня</button>
+            }
+        </>
+    )
+}

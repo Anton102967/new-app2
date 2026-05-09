@@ -1,10 +1,9 @@
-import Home from "./pages/Home.jsx";
-import {ToDoList} from "./components/Test.jsx";
+import {ThemeSwitcher, ToDoList} from "./components/Test.jsx";
 
 function App() {
     return (
         <>
-            <ToDoList />
+            <ThemeSwitcher />
         </>
     )
 }
