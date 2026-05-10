@@ -313,12 +313,14 @@ export function UserForm() {
             >
                 <input
                     onChange={(e) => setName(e.target.value)}
+                    value={name}
                     type="text"
                     placeholder={'Имя'}
                 />
                 <input
                     onChange={(e) => setEmail(e.target.value)}
                     type="text"
+                    value={email}
                     placeholder={'Электронная почта'}
                 />
                 <button>Отправить</button>
