@@ -1,9 +1,9 @@
-import {UserForm} from "./components/Test.jsx";
+import {Timer} from "./components/Test.jsx";
 
 function App() {
     return (
         <>
-            <UserForm />
+            <Timer />
         </>
     )
 }

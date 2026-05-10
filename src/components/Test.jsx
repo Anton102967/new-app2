@@ -329,3 +329,37 @@ export function UserForm() {
     )
 
 }
+
+export function Timer() {
+  const [time, setTime] = useState(0);
+  const [timerId, setTimerId] = useState(null);
+
+  const startTimer = () => {
+      if(timerId !== null) return;
+      const id = setInterval(() => {
+        setTime(time => time + 1);
+      }, 1000)
+      setTimerId(id);
+  };
+
+
+  const pauseTimer = () => {
+      clearInterval(timerId);
+      setTimerId(null)
+  };
+
+  const resetTimer = () => {
+      clearInterval(timerId);
+      setTimerId(null);
+      setTime(0);
+  };
+
+  return (
+    <>
+      {time}
+      <button onClick={startTimer}>Старт</button>
+      <button onClick={pauseTimer}>Пауза</button>
+      <button onClick={resetTimer}>Сброс</button>
+    </>
+  );
+}
