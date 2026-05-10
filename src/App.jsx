@@ -1,9 +1,9 @@
-import {MultiCounter} from "./components/Test.jsx";
+import {UserForm} from "./components/Test.jsx";
 
 function App() {
     return (
         <>
-            <MultiCounter />
+            <UserForm />
         </>
     )
 }

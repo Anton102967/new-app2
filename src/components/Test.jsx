@@ -275,3 +275,52 @@ export function MultiCounter() {
         </div>
     )
 }
+
+export function TextCount({count}) {
+    const [text, setText] = useState(null);
+    const [prewCount, setPrewCount] = useState(0);
+
+    if(count !== prewCount) {
+        setPrewCount(count);
+        setText(count > prewCount ? 'увеличилось' : 'уменьшилось')
+    }
+
+     return (
+        <>
+            {count}
+            {text && <p>Текущее значение {text}</p>}
+        </>
+    )
+}
+
+export function UserForm() {
+
+    const [name, setName] = useState(null);
+    const [email, setEmail] = useState(null);
+
+    const formSend = (e) => {
+        e.preventDefault();
+        const nameValue = e.target.elements.name.value;
+        const emailValue = e.target.elements.email.value;
+
+        setName(nameValue);
+        setEmail(emailValue);
+
+        console.log(nameValue);
+        console.log(emailValue);
+    }
+
+    return (
+        <>
+            <form
+                action=""
+                onClick={formSend}
+            >
+                <input name={'name'} type="text" placeholder={'Имя'}/>
+                <input name={'email'} type="text" placeholder={'Электронная почта'}/>
+                <button>Отправить</button>
+            </form>
+        </>
+    )
+
+}
