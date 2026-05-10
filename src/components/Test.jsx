@@ -300,24 +300,27 @@ export function UserForm() {
 
     const formSend = (e) => {
         e.preventDefault();
-        const nameValue = e.target.elements.name.value;
-        const emailValue = e.target.elements.email.value;
 
-        setName(nameValue);
-        setEmail(emailValue);
-
-        console.log(nameValue);
-        console.log(emailValue);
+        console.log(name);
+        console.log(email);
     }
 
     return (
         <>
             <form
                 action=""
-                onClick={formSend}
+                onSubmit={formSend}
             >
-                <input name={'name'} type="text" placeholder={'Имя'}/>
-                <input name={'email'} type="text" placeholder={'Электронная почта'}/>
+                <input
+                    onChange={(e) => setName(e.target.value)}
+                    type="text"
+                    placeholder={'Имя'}
+                />
+                <input
+                    onChange={(e) => setEmail(e.target.value)}
+                    type="text"
+                    placeholder={'Электронная почта'}
+                />
                 <button>Отправить</button>
             </form>
         </>
