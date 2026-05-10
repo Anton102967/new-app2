@@ -1,9 +1,9 @@
-import {Timer} from "./components/Test.jsx";
+import {Tabs} from "./components/Test.jsx";
 
 function App() {
     return (
         <>
-            <Timer />
+            <Tabs />
         </>
     )
 }

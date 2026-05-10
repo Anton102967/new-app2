@@ -333,6 +333,9 @@ export function UserForm() {
 export function Timer() {
   const [time, setTime] = useState(0);
   const [timerId, setTimerId] = useState(null);
+    const minutes = Math.floor(time / 60);
+    const seconds = time % 60;
+    const formattedTime = `${minutes} : ${seconds}`;
 
   const startTimer = () => {
       if(timerId !== null) return;
@@ -356,10 +359,23 @@ export function Timer() {
 
   return (
     <>
-      {time}
+      {formattedTime}
       <button onClick={startTimer}>Старт</button>
       <button onClick={pauseTimer}>Пауза</button>
       <button onClick={resetTimer}>Сброс</button>
     </>
   );
+}
+
+export function Tabs() {
+    const [activeTab, setActiveTab] = useState('home');
+    return(
+        <>
+            <button onClick={() => setActiveTab('home')}>Главная</button>
+            <button onClick={() => setActiveTab('about')}>О нас</button>
+            <button onClick={() => setActiveTab('contacts')}>Контакты</button>
+
+            {activeTab}
+        </>
+    )
 }
