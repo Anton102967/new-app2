@@ -1,9 +1,9 @@
-import {Tabs} from "./components/Test.jsx";
+import {AutoSaveForm} from "./components/Test.jsx";
 
 function App() {
     return (
         <>
-            <Tabs />
+            <AutoSaveForm />
         </>
     )
 }

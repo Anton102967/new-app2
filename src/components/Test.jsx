@@ -1,4 +1,4 @@
-import {Component, useState} from 'react';
+import {Component, useEffect, useRef, useState} from 'react';
 import {createPortal} from "react-dom";
 
 export function Name() {
@@ -375,7 +375,323 @@ export function Tabs() {
             <button onClick={() => setActiveTab('about')}>О нас</button>
             <button onClick={() => setActiveTab('contacts')}>Контакты</button>
 
-            {activeTab}
+            {activeTab === 'home' && <p>Это главная страница</p>}
+            {activeTab === 'about' && <p>Информация о нас</p>}
+            {activeTab === 'contacts' && <p>Наши контакты</p>}
         </>
+    )
+}
+
+export function FilterableList() {
+        const [category, setCategory] = useState('Все');
+        const items = [
+         { id: 1, name: 'Яблоко', category: 'Фрукты' },
+         { id: 2, name: 'Молоко', category: 'Молочные продукты' },
+         { id: 3, name: 'Хлеб', category: 'Хлебобулочные изделия' },
+    ];
+
+    return(
+        <>
+            <button onClick={() => setCategory('Все')}>Все</button>
+            <button onClick={() => setCategory('Фрукты')}>Фрукты</button>
+            <button onClick={() => setCategory('Молочные продукты')}>Молочные продукты</button>
+            <button onClick={() => setCategory('Хлебобулочные изделия')}>Хлебобулочные изделия</button>
+            <ul>
+                {items.filter(item => category === 'Все' || item.category === category)
+                .map((item) => (
+                    <li key={item.id}>{`${item.name}, ${item.category}`}</li>
+                ))
+            }
+            </ul>
+
+        </>
+    )
+}
+
+export function ShoppingList() {
+  const [products, setProducts] = useState([]);
+  const randomProducts = ['Яблоко', 'Банан', 'Апельсин', 'Груша'];
+
+  const addProduct = (value) => {
+    setProducts(prev => [...prev, value]);
+  };
+
+  const addItem = () => {
+        const rondomIndex = Math.floor(Math.random() * randomProducts.length);
+        const randomProduct = randomProducts[rondomIndex];
+        setProducts([...products, randomProduct]);
+  }
+  return (
+    <div>
+      {products.length === 0 ? (
+        <p>Список продуктов пуст</p>
+      ) : (
+        <ul>
+          {products.map(item => (
+            <li key={item}>{item}</li>
+          ))}
+        </ul>
+      )}
+
+      <AddItem
+        addItem={addItem}
+        resetList={() => setProducts([])}
+      />
+    </div>
+  );
+}
+
+function AddItem({ addItem, resetList }) {
+  return (
+    <div>
+      <button onClick={addItem}>Добавить продукт</button>
+      <button onClick={resetList}>Сбросить список</button>
+    </div>
+  );
+}
+
+export class CounterLifecycle extends Component {
+    constructor(props) {
+        super(props);
+
+        this.state = {
+            count: 0,
+        }
+
+        this.increment = this.increment.bind(this);
+    }
+
+    increment() {
+        this.setState({count: this.state.count + 1});
+    }
+
+    componentDidMount() {
+        document.title = `Count: ${this.state.count}`;
+    }
+
+    componentDidUpdate(prevProps, prevState) {
+        if(prevState.count !== this.state.count) {
+            document.title = `Count: ${this.state.count}`;
+        }
+    }
+
+    componentWillUnmount() {
+        console.log('Компонент будет удалён');
+    }
+
+    render() {
+        return (
+            <div>
+                {this.state.count}
+                <button onClick={this.increment}>Увеличить</button>
+            </div>
+        )
+    }
+}
+
+export function CounterEffect() {
+    const [count, setCount] = useState(0)
+
+    useEffect(() => {
+        document.title = `Count: ${count}`;
+
+        return () => {
+            console.log('Очистка перед обновлением или размонтированием');
+        }
+    }, [count])
+
+    return (
+        <div>
+            {count}
+            <button style={{margin: '15px'}} onClick={() => setCount(prev => prev + 1)}>
+                Увеличить
+            </button>
+        </div>
+    )
+}
+
+export function TimerNow () {
+    const [time, setTime] = useState(new Date());
+    const [isActive, setIsActive] = useState(false);
+
+    useEffect(() => {
+        if(!isActive) return;
+
+        const id = setInterval(() => {
+            setTime(new Date());
+        }, 1000)
+
+        return () => clearInterval(id);
+    }, [isActive])
+
+
+    const resetTimer  = () => {
+        setTime(new Date());
+        setIsActive(true);
+    }
+
+    return (
+        <div>
+            {time.toLocaleTimeString('ru-Ru')}
+            <button onClick={() => setIsActive(true)}>Старт</button>
+            <button onClick={() => setIsActive(false)}>Стопа</button>
+            <button onClick={resetTimer}>Обнуление</button>
+        </div>
+    )
+}
+
+export function TimeNotifier () {
+    const [time, setTime] = useState(new Date());
+    const isFirstFlaf = useRef(true);
+    const [wasUpdated, setWasUpdated] = useState(false);
+
+
+    useEffect(() => {
+        if(!wasUpdated) {
+            return;
+        }
+        alert(`Новое время: ${time.toLocaleTimeString('ru-RU')}`);
+    }, [time,wasUpdated])
+
+    const updateTime = () => {
+        setTime(new Date());
+        setWasUpdated(true)
+    }
+
+    return (
+        <div>
+            {time.toLocaleTimeString('ru-RU')}
+            <button onClick={updateTime}>Обновить</button>
+        </div>
+    )
+}
+
+
+export function CountdownTimer ({startTime}) {
+    const [restTime, setRestTime] = useState(startTime);
+    const [isActive, setIsActive] = useState(false)
+
+    useEffect(() => {
+        if (!isActive) return;
+
+        if (restTime <= 0) {
+            setIsActive(false);
+            alert('Время вышло');
+            return;
+        }
+
+        const id = setInterval(() => {
+            setRestTime(prev => prev - 1);
+        }, 1000);
+
+        return () => clearInterval(id);
+    }, [isActive, restTime]);
+
+    const resetTimer = () => {
+        setIsActive(false);
+        setRestTime(startTime);
+    }
+
+    const minute = Math.floor(restTime / 60);
+    const second = restTime % 60;
+    return (
+        <div>
+            {minute},
+            {second}
+            <button onClick={() => setIsActive(true)}>Старт</button>
+            <button onClick={() => setIsActive(false)}>Стоп</button>
+            <button onClick={resetTimer}>Сброс</button>
+        </div>
+    )
+}
+
+export function UserFormTwo() {
+    const [useForm, setUseForm] = useState({name: '', email: '', message: ''})
+    const [error, setError] = useState('')
+    const handleForm = (e) => {
+        const {name , value} = e.target;
+
+        setUseForm({
+            ...useForm,
+            [name]: value,
+        })
+        if (error) {
+            setError('');
+        }
+    }
+
+    const handleSubmit = (e) => {
+        e.preventDefault();
+
+        if (
+          useForm.name.length < 1 ||
+          useForm.email.length < 1 ||
+          useForm.message.length < 1
+        ) {
+          setError('Введите все поля формы');
+          return;
+        }
+
+        if (!useForm.email.includes('@')) {
+          setError('Введите корректный email');
+          return;
+        }
+
+        setError('');
+
+        console.log(useForm);
+
+        setUseForm({
+          name: '',
+          email: '',
+          message: '',
+        });
+    }
+
+    return (
+        <div>
+            <form action="" onSubmit={handleSubmit}>
+                <input onChange={handleForm} name={'name'} value={useForm.name} type="text"/>
+                <input onChange={handleForm} name={'email'} value={useForm.email} type="email"/>
+                <textarea onChange={handleForm} value={useForm.message} name={'message'} />
+                <button type={'submit'}>Отправить</button>
+            </form>
+            {error && <p>{error}</p>}
+        </div>
+    )
+}
+
+export function AutoSaveForm() {
+    const [useFormAuto, setUseFormAuto] = useState({name: '', email: ''});
+
+    const handleFormThree = (e) => {
+        const {name, value} = e.target;
+        setUseFormAuto({...useFormAuto, [name]: value});
+    }
+
+    useEffect(() => {
+        const id = setInterval(() => {
+            localStorage.setItem('autoSaveForm', JSON.stringify(useFormAuto));
+        }, 5000)
+
+        return () => clearInterval(id);
+    }, [useFormAuto])
+
+    const onSubmit = (e) => {
+        e.preventDefault();
+
+        setUseFormAuto({ name: '', email: ''})
+        localStorage.removeItem('autoSaveForm');
+    }
+
+    return (
+
+        <div>
+            <form action="" onSubmit={onSubmit}>
+                <input onChange={handleFormThree} name={'name'} value={useFormAuto.name} type="text"/>
+                <input onChange={handleFormThree} name={'email'} value={useFormAuto.email} type="email"/>
+                <button type={'submit'}>Отправить</button>
+            </form>
+        </div>
     )
 }
