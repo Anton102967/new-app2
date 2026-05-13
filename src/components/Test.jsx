@@ -721,8 +721,7 @@ export function UserFilter() {
 
 
 
-    const filterArray = (e) => {
-        setUseForm({...useForm, name: e.target.value});
+    const filterArray = () => {
         const filteredUsers = users.filter((user) => {
             return user.name.toLowerCase().includes(inputOne.current.value.toLowerCase());
         });
@@ -732,10 +731,10 @@ export function UserFilter() {
     useEffect(() => {
         const input = inputOne.current;
 
-        input.addEventListener('input ', filterArray)
+        input.addEventListener('input', filterArray)
             return () => input.removeEventListener('input', filterArray);
         ;
-    })
+    }, users)
 
     return (
         <div>
