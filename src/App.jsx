@@ -1,9 +1,9 @@
-import {AutoSaveForm} from "./components/Test.jsx";
+import {UserFilter} from "./components/Test.jsx";
 
 function App() {
     return (
         <>
-            <AutoSaveForm />
+            <UserFilter />
         </>
     )
 }

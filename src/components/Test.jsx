@@ -662,14 +662,25 @@ export function UserFormTwo() {
 }
 
 export function AutoSaveForm() {
-    const [useFormAuto, setUseFormAuto] = useState({name: '', email: ''});
+    const [useFormAuto, setUseFormAuto] = useState( () => {
+        const savedForm = localStorage.getItem('autoSaveForm');
+
+        return savedForm ? JSON.parse(savedForm) : {name: '', email: ''};
+    })
+
 
     const handleFormThree = (e) => {
         const {name, value} = e.target;
-        setUseFormAuto({...useFormAuto, [name]: value});
+        setUseFormAuto(prev => ({...prev, [name]: value}));
     }
 
     useEffect(() => {
+        const isEmpitiForm = !useFormAuto.name && !useFormAuto.email;
+
+        if(isEmpitiForm) {
+            return
+        }
+
         const id = setInterval(() => {
             localStorage.setItem('autoSaveForm', JSON.stringify(useFormAuto));
         }, 5000)
@@ -694,4 +705,47 @@ export function AutoSaveForm() {
             </form>
         </div>
     )
+}
+
+export function UserFilter() {
+    const initialUsers = [
+      { id: 1, name: 'Alice' },
+      { id: 2, name: 'Bob' },
+      { id: 3, name: 'Charlie' },
+      { id: 4, name: 'David' },
+    ];
+
+    const [users, setUsers] = useState(initialUsers);
+    const [filteredUsers, setFilteredUsers] = useState(initialUsers);
+    const inputOne = useRef(null);
+
+
+
+    const filterArray = (e) => {
+        setUseForm({...useForm, name: e.target.value});
+        const filteredUsers = users.filter((user) => {
+            return user.name.toLowerCase().includes(inputOne.current.value.toLowerCase());
+        });
+        setFilteredUsers(filteredUsers)
+    }
+
+    useEffect(() => {
+        const input = inputOne.current;
+
+        input.addEventListener('input ', filterArray)
+            return () => input.removeEventListener('input', filterArray);
+        ;
+    })
+
+    return (
+        <div>
+            <ul>
+                {filteredUsers.map(user => (
+                    <li key={user.id}>{user.name}</li>
+                ))}
+            </ul>
+            <input type="text" ref={inputOne}/>
+        </div>
+    )
+
 }
