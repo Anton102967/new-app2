@@ -731,9 +731,8 @@ export function UserFilter() {
     useEffect(() => {
         const input = inputOne.current;
 
-        input.addEventListener('input', filterArray)
-            return () => input.removeEventListener('input', filterArray);
-        ;
+        input.addEventListener('input', filterArray);
+        return () => input.removeEventListener('input', filterArray);
     }, users)
 
     return (
@@ -744,6 +743,19 @@ export function UserFilter() {
                 ))}
             </ul>
             <input type="text" ref={inputOne}/>
+        </div>
+    )
+
+}
+
+export function FocusInput() {
+    const inputOne = useRef(null);
+
+
+    return (
+        <div>
+            <input ref={inputOne} type="text"/>
+            <button onClick={() => inputOne.current.focus()}></button>
         </div>
     )
 

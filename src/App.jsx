@@ -1,9 +1,9 @@
-import {UserFilter} from "./components/Test.jsx";
+import {FocusInput} from "./components/Test.jsx";
 
 function App() {
     return (
         <>
-            <UserFilter />
+            <FocusInput />
         </>
     )
 }
