@@ -1,4 +1,5 @@
 import {Component, useEffect, useRef, useState} from 'react';
+import '../styles/style_modal.css'
 import {createPortal} from "react-dom";
 
 export function Name() {
@@ -189,25 +190,6 @@ export class Counter extends Component {
             </div>
         )
     }
-}
-
-export function Modal({isOpen, onClose, children}) {
-    if(!isOpen) return null;
-
-     return createPortal(
-         <div className='modal'>
-             <div className={'modal-content'}>
-                 <button onClick={() => onClose(false)} className={'close-button'}>
-                     Закрыть модальное окно
-                 </button>
-                 {children}
-             </div>
-             <div onClick={() => onClose(false)} className='modal-overlay'></div>
-        </div>,
-         document.body
-
-
-    )
 }
 
 export function ToDoList() {
@@ -754,9 +736,205 @@ export function FocusInput() {
 
     return (
         <div>
-            <input ref={inputOne} type="text"/>
-            <button onClick={() => inputOne.current.focus()}></button>
+            <input ref={inputOne} type="text" value={'Hio'}/>
+            <button onClick={() => inputOne.current.focus()}>Фокус на поле</button>
         </div>
     )
+}
 
+export function AutoFocusInput() {
+    const inputTwo = useRef(null);
+
+    useEffect(() => {
+        inputTwo.current.focus()
+    }, [])
+
+    return (
+        <div>
+            <input ref={inputTwo} type="text" />
+            <button onClick={() => inputTwo.current.focus()}>Фокус на поле</button>
+        </div>
+    )
+}
+
+export function MultiFocusInput() {
+    const inputOneRef = useRef(null);
+    const inputTwoRef = useRef(null);
+
+
+    return (
+        <div>
+            <input ref={inputOneRef} type="text" />
+            <input ref={inputTwoRef} type="text" />
+            <button onClick={() => inputOneRef.current.focus()}>Фокус на поле 1</button>
+            <button onClick={() => inputTwoRef.current.focus()}>Фокус на поле 2</button>
+        </div>
+    )
+}
+
+export function FormWithValidation() {
+    const inputOneRef = useRef({
+        name: null,
+        email: null,
+    });
+
+    const validateForm = () => {
+         if(inputOneRef.current.name.value <= 0) {
+             inputOneRef.current.name.focus();
+             return;
+         }
+        if(inputOneRef.current.email.value <= 0 || !inputOneRef.current.email.value.includes('@')) {
+            inputOneRef.current.email.focus();
+             return;
+        }
+    }
+
+    if (isLoading) {
+    return <p>Загрузка...</p>;
+}
+
+    return (
+        <div>
+
+            {isLoading && <p>fgdsfgdsgs</p> }
+            <input ref={(e) => inputOneRef.current.name = e} type="text" placeholder={'Введите имя'}  />
+            <input ref={(e) => inputOneRef.current.email = e} type="email" placeholder={'Введите емаил'} />
+            <button onClick={validateForm}>Фокус на поле 2</button>
+        </div>
+    )
+}
+
+function useFetchUsers(apiUrl) {
+  const [users, setUsers] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
+
+  useEffect(() => {
+    const fetchUsers = async () => {
+      try {
+        setLoading(true);
+        setError(null);
+
+        const response = await fetch(apiUrl);
+
+        if (!response.ok) {
+          throw new Error('Network response was not ok');
+        }
+
+        const data = await response.json();
+        setUsers(data);
+      } catch (error) {
+        setError(error);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchUsers();
+  }, [apiUrl]);
+
+  return { users, loading, error };
+}
+
+export function UserPage() {
+  const [apiUrl, setApiUrl] = useState(
+    'https://jsonplaceholder.typicode.com/users'
+  );
+
+  const { users, loading, error } = useFetchUsers(apiUrl);
+
+  if (loading) {
+    return <p>Загрузка...</p>;
+  }
+
+  if (error) {
+    return <p>Ошибка: {error.message}</p>;
+  }
+
+  return (
+    <div>
+      <button
+        onClick={() =>
+          setApiUrl('https://jsonplaceholder.typicode.com/users')
+        }
+      >
+        Загрузить пользователей
+      </button>
+
+      <button
+        onClick={() =>
+          setApiUrl('https://jsonplaceholder.typicode.com/posts')
+        }
+      >
+        Загрузить посты
+      </button>
+
+      <ul>
+        {users.map(item => (
+          <li key={item.id}>
+            {item.name || item.title}
+          </li>
+        ))}
+      </ul>
+    </div>
+  );
+}
+
+export function Modal({isOpen, onClose, children}) {
+    const Ref = useRef(null);
+
+    useOnClickOutside(Ref, () => onClose(false));
+
+    if(!isOpen) return null;
+
+     return createPortal(
+         <div className='modal'>
+             <div className="modal-overlay"></div>
+
+             <div className={'modal-content'} ref={Ref}>
+                 <button onClick={() => onClose(false)} className={'close-button'}>
+                     Закрыть модальное окно
+                 </button>
+                 {children}
+             </div>
+             <div onClick={() => onClose(false)} className='modal-overlay'></div>
+        </div>,
+         document.body
+
+
+    )
+}
+
+export function useOnClickOutside(Ref, onCloseOpen) {
+
+    useEffect(() => {
+        const handleMouseDown = (event) => {
+            if (!Ref.current) return;
+
+            if (!Ref.current.contains(event.target)) {
+                onCloseOpen();
+            }
+        }
+
+
+        document.addEventListener('mousedown', handleMouseDown);
+
+        return () => document.addEventListener('mousedown', handleMouseDown)
+    }, [Ref, onCloseOpen]);
+
+}
+
+export function Modal_Two({isOpen, onClose, children}) {
+    if(!isOpen) return null;
+
+    return createPortal(
+        <div className='modal_two'>
+            <div className='modaloverlay_two' onClick={onClose}></div>
+            <div className={'modal-content_two'}>
+                <button onClick={onClose}>Закрыть</button>
+                {children}
+            </div>
+        </div>
+        , document.body
+    )
 }
