@@ -1,12 +1,13 @@
-import {Modal_Two} from "./components/Test.jsx";
+import {Moment_Moldovan} from "./components/Test.jsx";
 import {useState} from "react";
 
 function App() {
-    const [state, setState] = useState(true);
+    const [count, setCount] = useState(0);
     return (
         <>
-            <button onClick={() => setState(true)}>Открыть модальное окно</button>
-            <Modal_Two isOpen={state} onClose={() => setState(false)} />
+            <Moment_Moldovan state={count}/>
+            <button onClick={() =>  setCount(prev => prev + 1)}>Увеличить</button>
+            <button onClick={() =>  setCount(prev => prev - 1)}>Уменьшилось</button>
         </>
     )
 }

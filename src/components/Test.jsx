@@ -938,3 +938,23 @@ export function Modal_Two({isOpen, onClose, children}) {
         , document.body
     )
 }
+
+export function Moment_Moldovan({state}) {
+    const [prevCount, setPrevCount] = useState(state);
+    const [boleanString, setBoleanString ] = useState(null);
+    const message = boleanString ? 'Число увеличилось' : 'Число уменьшелось'
+
+
+    if(state !== prevCount) {
+        setPrevCount(state);
+        setBoleanString(state > prevCount);
+        console.log(state, prevCount);
+    }
+
+    return (
+        <div>
+            {state}
+            {boleanString !== null && message}
+        </div>
+    )
+}
